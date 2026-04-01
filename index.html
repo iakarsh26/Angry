@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dudu Bubu Sorry 🥺💗</title>
+
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  text-align:center;
+  background:linear-gradient(135deg,#ffd6e0,#ffeef3);
+  overflow-x:hidden;
+}
+
+/* glow */
+h1,h2 { color:#ff4d88; text-shadow:0 0 10px #ff99bb; }
+
+section { display:none; padding:40px; }
+.active { display:block; }
+
+.btn {
+  padding:12px 22px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff99bb;
+}
+
+.yes { background:green; }
+.no { background:red; position:absolute; }
+
+.footer { margin-top:30px; font-size:12px; }
+
+.heart {
+  position:fixed;
+  bottom:-10px;
+  animation:float 5s linear infinite;
+}
+@keyframes float {
+  to { transform:translateY(-100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+<button class="btn" onclick="toggleMusic()">🎵 Music</button>
+
+<!-- PAGE 1 -->
+<section id="p1" class="active">
+<h1 id="title">Hey My Bubu 🥺💗</h1>
+<p id="typing"></p>
+<button class="btn" onclick="next(2)">Enter Dudu World 💖</button>
+</section>
+
+<!-- PAGE 2 -->
+<section id="p2">
+<h2>Sorry from your Dudu 🥺</h2>
+
+<p style="max-width:600px;margin:auto;">
+Bubu… I know I hurt you and I’m really really sorry 🥺  
+Tu sirf ek person nahi hai meri life me… tu meri habit hai, meri smile hai, meri peace hai 💗  
+
+Tera gussa bhi cute lagta hai… but jab tu mujhse baat nahi karti na… sach me sab empty lagta hai 😔  
+
+Tu honestly sabse sweet, caring aur beautiful soul hai 💖  
+Please apne dudu ko maaf kar de ek baar 🥺👉👈
+</p>
+
+<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+<img src="https://media.giphy.com/media/j5QcmXoFWl4Q0/giphy.gif">
+
+<br><br>
+<button class="btn" onclick="next(3)">See More 😚</button>
+</section>
+
+<!-- PAGE 3 -->
+<section id="p3">
+<h2>Dudu Bubu Fun Zone 😂💗</h2>
+
+<p>👉 Tu gussa = mera network down 📶❌</p>
+<p>👉 Tu smile = full 5G speed 😍📶</p>
+<p>👉 Tu ignore = system crash 💀😂</p>
+<p>👉 Tu pyaar = life upgrade 💖🔥</p>
+
+<img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+<img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif">
+
+<br><br>
+<button class="btn" onclick="next(4)">Final Question 😳</button>
+</section>
+
+<!-- PAGE 4 -->
+<section id="p4">
+<h2>Forgive your Dudu? 🥺👉👈</h2>
+
+<button class="btn yes" onclick="yesClick()">YES 💖</button>
+<button class="btn no" id="no">NO 😒</button>
+
+<p id="res"></p>
+
+<br><br>
+<button class="btn" onclick="next(5)">Create Yours 💖</button>
+</section>
+
+<!-- PAGE 5 -->
+<section id="p5">
+<h2>Create for your Bubu 😍</h2>
+
+<input id="name" placeholder="Enter your name">
+<br><br>
+
+<button class="btn" onclick="gen()">Generate Link 🔗</button>
+<p id="link"></p>
+</section>
+
+<div class="footer">Made by Akarsh Mehta ™️</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+function next(n){
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+ document.getElementById("p"+n).classList.add("active");
+}
+
+/* typing */
+let t="Bubu please gussa mat ho... your dudu is really sorry 🥺💗";
+let i=0;
+(function type(){
+ if(i<t.length){
+  document.getElementById("typing").innerHTML+=t[i++];
+  setTimeout(type,40);
+ }
+})();
+
+/* music */
+function toggleMusic(){
+ let m=document.getElementById("music");
+ m.paused?m.play():m.pause();
+}
+
+/* NO button */
+let no=document.getElementById("no");
+no.onmouseover=no.ontouchstart=function(){
+ no.style.top=Math.random()*300+"px";
+ no.style.left=Math.random()*300+"px";
+}
+
+/* YES */
+function yesClick(){
+ document.getElementById("res").innerHTML="Yayyy Bubu forgave Dudu 🥺💖🎊";
+ confetti();
+}
+
+/* generator */
+function gen(){
+ let n=document.getElementById("name").value;
+ let url=location.href.split("?")[0]+"?n="+n;
+ document.getElementById("link").innerText=url;
+}
+
+/* name */
+let p=new URLSearchParams(location.search);
+if(p.get("n")){
+ document.getElementById("title").innerText="Hey "+p.get("n")+" 🥺💗";
+}
+
+/* hearts */
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"vw";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),5000);
+},400);
+</script>
+
+</body>
+</html>
