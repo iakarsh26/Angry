@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dudu Bubu 💖</title>
+<title>For Someone Special 💖</title>
 
 <style>
-*{box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
   font-family:'Segoe UI',sans-serif;
   background:url('https://i.imgur.com/8Km9tLL.jpg') center/cover no-repeat;
-  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
 
 /* overlay */
@@ -20,59 +23,62 @@ body::before{
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.3);
-  backdrop-filter:blur(6px);
+  background:rgba(255,182,193,0.35);
+  backdrop-filter:blur(10px);
   z-index:-1;
 }
 
-/* container */
+/* card */
 .container{
-  width:92%;
-  max-width:380px;
-  margin:20px auto;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  border-radius:20px;
-  padding:20px;
+  width:90%;
+  max-width:360px;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:22px;
   text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  box-shadow:0 10px 40px rgba(0,0,0,0.2);
 }
 
-/* text */
-h1,h2{color:#ff4d88}
+h1,h2{color:#ff5c8a;margin-bottom:10px}
+p{font-size:15px;line-height:1.5;color:#333}
 
 /* buttons */
 .btn{
   width:100%;
-  padding:12px;
-  margin-top:10px;
+  padding:13px;
+  margin-top:12px;
   border:none;
   border-radius:14px;
-  background:linear-gradient(45deg,#ff4d88,#ff85a2);
+  background:linear-gradient(45deg,#ff6fa5,#ffc1cc);
   color:white;
-  font-size:16px;
-  box-shadow:0 0 15px #ff99bb;
+  font-size:15px;
   transition:0.2s;
 }
-.btn:active{transform:scale(0.95)}
+.btn:active{transform:scale(0.96)}
 
-.yes{background:linear-gradient(45deg,#28a745,#5cd65c)}
-.no{background:#dc3545;position:relative}
+.yes{background:linear-gradient(45deg,#28a745,#6ee17a)}
+.no{background:#ff4d4d;position:relative}
 
 /* gifs */
-img{width:95px;margin:5px;border-radius:12px;opacity:0;animation:fadeIn 1s forwards}
-img:nth-child(1){animation-delay:0.5s}
-img:nth-child(2){animation-delay:1s}
-img:nth-child(3){animation-delay:1.5s}
-
-@keyframes fadeIn{
-  to{opacity:1}
+img{
+  width:95px;
+  margin:6px;
+  border-radius:12px;
+  opacity:0;
+  animation:fade 1s forwards;
 }
+img:nth-child(1){animation-delay:0.4s}
+img:nth-child(2){animation-delay:0.8s}
+img:nth-child(3){animation-delay:1.2s}
 
-/* floating hearts */
+@keyframes fade{to{opacity:1}}
+
+/* hearts */
 .heart{
   position:fixed;
   bottom:-10px;
+  font-size:18px;
   animation:float 6s linear infinite;
 }
 @keyframes float{to{transform:translateY(-100vh)}}
@@ -82,10 +88,11 @@ img:nth-child(3){animation-delay:1.5s}
   position:fixed;
   bottom:20px;
   right:20px;
-  background:#ff4d88;
+  background:#ff6fa5;
   color:white;
   padding:12px 16px;
   border-radius:30px;
+  font-size:14px;
 }
 
 /* popup */
@@ -95,39 +102,22 @@ img:nth-child(3){animation-delay:1.5s}
   bottom:0;
   left:0;
   width:100%;
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(15px);
+  background:white;
   padding:20px;
   border-radius:20px 20px 0 0;
-  animation:slideUp 0.4s ease;
+  animation:slide 0.3s ease;
 }
-@keyframes slideUp{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
-}
+@keyframes slide{from{transform:translateY(100%)} to{transform:translateY(0)}}
 
 input{
   width:90%;
   padding:10px;
   border-radius:10px;
-  border:1px solid #ccc;
+  border:1px solid #ddd;
   margin-top:10px;
 }
 
-.footer{font-size:12px;margin-top:10px}
-
-/* fade pages */
-.fade{animation:fade 0.5s}
-@keyframes fade{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* cinematic */
-.cinema{
-  background:rgba(0,0,0,0.6)!important;
-  color:white;
-}
+.footer{font-size:12px;margin-top:10px;color:#555}
 </style>
 </head>
 
@@ -135,12 +125,14 @@ input{
 
 <div class="container" id="app">
 
-<div id="p1" class="fade">
-<h1 id="title">Hey Bubu 🥺</h1>
+<!-- PAGE 1 -->
+<div id="p1">
+<h1 id="title"></h1>
 <p id="typing"></p>
 <button class="btn" onclick="next(2)">Enter 💖</button>
 </div>
 
+<!-- PAGE 2 -->
 <div id="p2" style="display:none;">
 <h2>Sorry 🥺</h2>
 <p id="shayari"></p>
@@ -151,10 +143,12 @@ input{
 <button class="btn" onclick="next(3)">Next 😚</button>
 </div>
 
+<!-- PAGE 3 -->
 <div id="p3" style="display:none;">
-<h2>Dudu Bubu 😂</h2>
-<p>Tu gussa = network down 📶❌</p>
-<p>Tu smile = life set 😍</p>
+<h2>Listen na 🥺</h2>
+
+<p id="fun1"></p>
+<p id="fun2"></p>
 
 <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
@@ -163,75 +157,95 @@ input{
 <button class="btn" onclick="next(4)">Final 😳</button>
 </div>
 
+<!-- PAGE 4 -->
 <div id="p4" style="display:none;">
 <h2>Forgive me? 🥺</h2>
 <button class="btn yes" onclick="celebrate()">YES 💖</button>
 <button class="btn no" id="no">NO 😒</button>
 </div>
 
-<div id="celebration" style="display:none;" class="fade">
+<!-- CELEBRATION -->
+<div id="celebration" style="display:none;">
 <h2>YAYYY 😭💖</h2>
+
 <p id="finalText"></p>
 
-<button class="btn" onclick="playYT()">Tap to feel this moment 💖🎶</button>
+<button class="btn" onclick="playYT()">Yeh moment sirf hum dono ke liye 🥺🎶</button>
 
 <div id="yt" style="display:none;margin-top:10px;">
 <iframe width="100%" height="200"
 src="https://www.youtube.com/embed/DkTRLHXMw8k?autoplay=1"
 allow="autoplay"></iframe>
 </div>
+
 </div>
 
 <div class="footer">Made by Akarsh Mehta ™️</div>
 
 </div>
 
+<!-- FLOAT -->
 <button class="float" onclick="openPop()">Create Yours 💖</button>
 
+<!-- POPUP -->
 <div class="popup" id="pop">
-<h3>Create Link 💖</h3>
+<h3>Create Your Link 💖</h3>
 <input id="f" placeholder="Your Name">
-<input id="t" placeholder="Bubu Name">
-<button class="btn" onclick="genPop()">Generate</button>
-<p id="plink"></p>
+<input id="t" placeholder="Their Name">
+<button class="btn" onclick="gen()">Generate</button>
+<p id="link"></p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
+
+/* params */
+let p=new URLSearchParams(location.search);
+let to=p.get("to")||"Someone Special";
+let from=p.get("from")||"Someone";
+
+/* title */
+document.getElementById("title").innerText="Hey "+to+" 🥺💗";
+
+/* typing intro */
+let text=`Sach bolu ${to}… jab tu gussa hoti hai na, sab ajeeb lagta hai 🥺`;
+let i=0;
+(function(){
+ if(i<text.length){
+  document.getElementById("typing").innerHTML+=text[i++];
+  setTimeout(arguments.callee,40);
+ }
+})();
+
+/* shayari */
+let lines=[
+`Jab tu hasti hai na ${to}… mera din ban jata hai 💗`,
+`${to}, tumhari aadat si ho gayi hai mujhe…`,
+`Gussa bhi tumhara pyara lagta hai…`,
+`Bas maaf kar do na ${to} 🥺👉👈`
+];
+let j=0;
+function typeS(){
+ if(j<lines.length){
+  document.getElementById("shayari").innerHTML+=lines[j]+"<br>";
+  j++;
+  setTimeout(typeS,800);
+ }
+}
+typeS();
+
+/* fun */
+document.getElementById("fun1").innerText=`${to} gussa = mera system hang 😭`;
+document.getElementById("fun2").innerText=`${to} smile = mera pura din set 💗`;
+
+/* nav */
 function next(n){
  document.querySelectorAll("#app > div").forEach(d=>d.style.display="none");
  document.getElementById("p"+n).style.display="block";
 }
 
-/* typing intro */
-let txt="Please gussa mat ho… your dudu is really sorry 🥺💗";
-let i=0;
-(function type(){
- if(i<txt.length){
-  document.getElementById("typing").innerHTML+=txt[i++];
-  setTimeout(type,40);
- }
-})();
-
-/* shayari typing */
-let shayari=[
-"Tum meri duniya ho 💗",
-"Tum bin sab adhoora hai…",
-"Gussa tumhara bhi pyara lagta hai…",
-"Maaf kar do na mujhe Bubu 🥺👉👈"
-];
-let j=0;
-function typeShayari(){
- if(j<shayari.length){
-  document.getElementById("shayari").innerHTML+=shayari[j]+"<br>";
-  j++;
-  setTimeout(typeShayari,800);
- }
-}
-typeShayari();
-
-/* NO button */
+/* no button */
 let no=document.getElementById("no");
 no.onmouseover=no.ontouchstart=function(){
  no.style.position="absolute";
@@ -239,29 +253,28 @@ no.onmouseover=no.ontouchstart=function(){
  no.style.left=Math.random()*200+"px";
 }
 
-/* celebration cinematic */
+/* celebration */
 function celebrate(){
  document.querySelectorAll("#app > div").forEach(d=>d.style.display="none");
  document.getElementById("celebration").style.display="block";
- document.body.classList.add("cinema");
- confetti({particleCount:200,spread:120});
 
- let text=[
-  "Tu meri duniya hai 💗",
-  "Main promise karta hoon kabhi hurt nahi karunga 🥺",
-  "I love you my Bubu 💖"
+ confetti({particleCount:180,spread:120});
+
+ let msg=[
+  `Main perfect nahi hoon ${to}…`,
+  `Par tere liye better banna chahta hoon 🥺`,
+  `I love you ${to} 💖`,
+  `– From ${from} 💌`
  ];
  let k=0;
- let box=document.getElementById("finalText");
- box.innerHTML="";
- function typeFinal(){
-  if(k<text.length){
-    box.innerHTML+=text[k]+"<br>";
-    k++;
-    setTimeout(typeFinal,1000);
+ function type(){
+  if(k<msg.length){
+   document.getElementById("finalText").innerHTML+=msg[k]+"<br>";
+   k++;
+   setTimeout(type,900);
   }
  }
- typeFinal();
+ setTimeout(type,400);
 }
 
 /* song */
@@ -274,18 +287,12 @@ function openPop(){
  document.getElementById("pop").style.display="block";
 }
 
-/* generate */
-function genPop(){
+/* generator */
+function gen(){
  let f=document.getElementById("f").value;
  let t=document.getElementById("t").value;
  let url=location.href.split("?")[0]+"?to="+t+"&from="+f;
- document.getElementById("plink").innerText=url;
-}
-
-/* name */
-let p=new URLSearchParams(location.search);
-if(p.get("to")){
- document.getElementById("title").innerText="Hey "+p.get("to")+" 🥺💗";
+ document.getElementById("link").innerText=url;
 }
 
 /* hearts */
@@ -296,7 +303,8 @@ setInterval(()=>{
  h.style.left=Math.random()*100+"vw";
  document.body.appendChild(h);
  setTimeout(()=>h.remove(),6000);
-},500);
+},600);
+
 </script>
 
 </body>
