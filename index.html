@@ -6,51 +6,127 @@
 <title>Dudu Bubu 💖</title>
 
 <style>
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#ffd6e0,#ffeef3);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
+  background:url('https://i.imgur.com/8Km9tLL.jpg') center/cover no-repeat;
+  overflow:hidden;
 }
 
-.container {
-  width:95%;
-  max-width:400px;
-  background:white;
+/* overlay */
+body::before{
+  content:'';
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.3);
+  backdrop-filter:blur(6px);
+  z-index:-1;
+}
+
+/* container */
+.container{
+  width:92%;
+  max-width:380px;
+  margin:20px auto;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(12px);
   border-radius:20px;
   padding:20px;
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
 }
 
-h1,h2 { color:#ff4d88; }
+/* text */
+h1,h2{color:#ff4d88}
 
-.btn {
+/* buttons */
+.btn{
   width:100%;
   padding:12px;
   margin-top:10px;
   border:none;
-  border-radius:12px;
-  background:#ff4d88;
+  border-radius:14px;
+  background:linear-gradient(45deg,#ff4d88,#ff85a2);
   color:white;
   font-size:16px;
+  box-shadow:0 0 15px #ff99bb;
+  transition:0.2s;
+}
+.btn:active{transform:scale(0.95)}
+
+.yes{background:linear-gradient(45deg,#28a745,#5cd65c)}
+.no{background:#dc3545;position:relative}
+
+/* gifs */
+img{width:95px;margin:5px;border-radius:12px;opacity:0;animation:fadeIn 1s forwards}
+img:nth-child(1){animation-delay:0.5s}
+img:nth-child(2){animation-delay:1s}
+img:nth-child(3){animation-delay:1.5s}
+
+@keyframes fadeIn{
+  to{opacity:1}
 }
 
-.yes { background:#28a745; }
-.no { background:#dc3545; position:relative; }
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{to{transform:translateY(-100vh)}}
 
-img {
-  width:110px;
-  margin:6px;
+/* floating button */
+.float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#ff4d88;
+  color:white;
+  padding:12px 16px;
+  border-radius:30px;
+}
+
+/* popup */
+.popup{
+  display:none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(15px);
+  padding:20px;
+  border-radius:20px 20px 0 0;
+  animation:slideUp 0.4s ease;
+}
+@keyframes slideUp{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+
+input{
+  width:90%;
+  padding:10px;
   border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:10px;
 }
 
-.footer {
-  font-size:12px;
-  margin-top:15px;
+.footer{font-size:12px;margin-top:10px}
+
+/* fade pages */
+.fade{animation:fade 0.5s}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* cinematic */
+.cinema{
+  background:rgba(0,0,0,0.6)!important;
+  color:white;
 }
 </style>
 </head>
@@ -59,22 +135,15 @@ img {
 
 <div class="container" id="app">
 
-<!-- PAGE 1 -->
-<div id="p1">
+<div id="p1" class="fade">
 <h1 id="title">Hey Bubu 🥺</h1>
 <p id="typing"></p>
 <button class="btn" onclick="next(2)">Enter 💖</button>
 </div>
 
-<!-- PAGE 2 -->
 <div id="p2" style="display:none;">
 <h2>Sorry 🥺</h2>
-<p>
-Tu meri favorite person hai 💗  
-Aur jab tu gussa hoti hai na… sab empty lagta hai 😔  
-Tu meri smile hai, meri peace hai…  
-Please apne dudu ko maaf kar de 🥺👉👈
-</p>
+<p id="shayari"></p>
 
 <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
 <img src="https://media.giphy.com/media/j5QcmXoFWl4Q0/giphy.gif">
@@ -82,13 +151,10 @@ Please apne dudu ko maaf kar de 🥺👉👈
 <button class="btn" onclick="next(3)">Next 😚</button>
 </div>
 
-<!-- PAGE 3 -->
 <div id="p3" style="display:none;">
 <h2>Dudu Bubu 😂</h2>
-
-<p>👉 Tu gussa = mera network gone 📶❌</p>
-<p>👉 Tu smile = life set 😍</p>
-<p>👉 Tu ignore = system crash 💀😂</p>
+<p>Tu gussa = network down 📶❌</p>
+<p>Tu smile = life set 😍</p>
 
 <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
@@ -97,52 +163,37 @@ Please apne dudu ko maaf kar de 🥺👉👈
 <button class="btn" onclick="next(4)">Final 😳</button>
 </div>
 
-<!-- PAGE 4 -->
 <div id="p4" style="display:none;">
 <h2>Forgive me? 🥺</h2>
 <button class="btn yes" onclick="celebrate()">YES 💖</button>
 <button class="btn no" id="no">NO 😒</button>
 </div>
 
-<!-- CELEBRATION -->
-<div id="celebration" style="display:none;">
-<h2>YAYYYY 😭💖</h2>
+<div id="celebration" style="display:none;" class="fade">
+<h2>YAYYY 😭💖</h2>
+<p id="finalText"></p>
 
-<p>
-Bubu ne maaf kar diya 😭💗  
-Tu sach me meri life ki best cheez hai…  
-Main promise karta hoon dobara hurt nahi karunga 🥺  
-I love you my bubu 💖🧸
-</p>
+<button class="btn" onclick="playYT()">Tap to feel this moment 💖🎶</button>
 
-<img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif">
-<img src="https://media.giphy.com/media/j5QcmXoFWl4Q0/giphy.gif">
-<img src="https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif">
-
-<!-- SONG BUTTON -->
-<button class="btn" onclick="playYT()">💖 Tap to feel this moment 🎶</button>
-
-<div id="yt" style="display:none; margin-top:10px;">
+<div id="yt" style="display:none;margin-top:10px;">
 <iframe width="100%" height="200"
 src="https://www.youtube.com/embed/DkTRLHXMw8k?autoplay=1"
-frameborder="0"
-allow="autoplay; encrypted-media"
-allowfullscreen></iframe>
+allow="autoplay"></iframe>
 </div>
-
-<button class="btn" onclick="next(5)">Create Yours 💖</button>
-</div>
-
-<!-- CREATE -->
-<div id="p5" style="display:none;">
-<h2>Create Link 🔗</h2>
-<input id="name" placeholder="Enter your name" style="width:90%;padding:10px;">
-<button class="btn" onclick="gen()">Generate</button>
-<p id="link"></p>
 </div>
 
 <div class="footer">Made by Akarsh Mehta ™️</div>
 
+</div>
+
+<button class="float" onclick="openPop()">Create Yours 💖</button>
+
+<div class="popup" id="pop">
+<h3>Create Link 💖</h3>
+<input id="f" placeholder="Your Name">
+<input id="t" placeholder="Bubu Name">
+<button class="btn" onclick="genPop()">Generate</button>
+<p id="plink"></p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -153,15 +204,32 @@ function next(n){
  document.getElementById("p"+n).style.display="block";
 }
 
-/* typing */
-let t="Please gussa mat ho… your dudu is really sorry 🥺💗";
+/* typing intro */
+let txt="Please gussa mat ho… your dudu is really sorry 🥺💗";
 let i=0;
 (function type(){
- if(i<t.length){
-  document.getElementById("typing").innerHTML+=t[i++];
+ if(i<txt.length){
+  document.getElementById("typing").innerHTML+=txt[i++];
   setTimeout(type,40);
  }
 })();
+
+/* shayari typing */
+let shayari=[
+"Tum meri duniya ho 💗",
+"Tum bin sab adhoora hai…",
+"Gussa tumhara bhi pyara lagta hai…",
+"Maaf kar do na mujhe Bubu 🥺👉👈"
+];
+let j=0;
+function typeShayari(){
+ if(j<shayari.length){
+  document.getElementById("shayari").innerHTML+=shayari[j]+"<br>";
+  j++;
+  setTimeout(typeShayari,800);
+ }
+}
+typeShayari();
 
 /* NO button */
 let no=document.getElementById("no");
@@ -171,31 +239,65 @@ no.onmouseover=no.ontouchstart=function(){
  no.style.left=Math.random()*200+"px";
 }
 
-/* celebration */
+/* celebration cinematic */
 function celebrate(){
  document.querySelectorAll("#app > div").forEach(d=>d.style.display="none");
  document.getElementById("celebration").style.display="block";
- confetti({particleCount:150,spread:100});
+ document.body.classList.add("cinema");
+ confetti({particleCount:200,spread:120});
+
+ let text=[
+  "Tu meri duniya hai 💗",
+  "Main promise karta hoon kabhi hurt nahi karunga 🥺",
+  "I love you my Bubu 💖"
+ ];
+ let k=0;
+ let box=document.getElementById("finalText");
+ box.innerHTML="";
+ function typeFinal(){
+  if(k<text.length){
+    box.innerHTML+=text[k]+"<br>";
+    k++;
+    setTimeout(typeFinal,1000);
+  }
+ }
+ typeFinal();
 }
 
-/* youtube play */
+/* song */
 function playYT(){
  document.getElementById("yt").style.display="block";
 }
 
-/* generator */
-function gen(){
- let n=document.getElementById("name").value;
- let url=location.href.split("?")[0]+"?n="+n;
- document.getElementById("link").innerText=url;
+/* popup */
+function openPop(){
+ document.getElementById("pop").style.display="block";
+}
+
+/* generate */
+function genPop(){
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let url=location.href.split("?")[0]+"?to="+t+"&from="+f;
+ document.getElementById("plink").innerText=url;
 }
 
 /* name */
 let p=new URLSearchParams(location.search);
-if(p.get("n")){
- document.getElementById("title").innerText="Hey "+p.get("n")+" 🥺💗";
+if(p.get("to")){
+ document.getElementById("title").innerText="Hey "+p.get("to")+" 🥺💗";
 }
+
+/* hearts */
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"vw";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+},500);
 </script>
 
 </body>
-</html>
+  </html>
